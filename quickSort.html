@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd"
+    >
+<html lang="en">
+<head>
+    <title>QuickSort</title>
+</head>
+<body>
+    <h1>QuickSort</h1>
+    <div id="output"></div>
+    
+    
+    <script type="text/javascript">
+      var items = [1,2,6,4,98,76,6,5,4,12,35,1],
+        div = document.getElementById('output'),
+        sortedItems = new Array();
+      
+      function quickSort(theItems){
+        var pivot = new Array(), less = new Array(), more = new Array(), itemsLen = 0;
+        
+        console.log(theItems);
+        
+        if(typeof theItems === 'undefined'){
+          return new Array();
+        }
+        
+        itemsLen = theItems.length;
+        
+        if( itemsLen <= 1 ){
+          return theItems
+        }
+        
+        pivot[0] = theItems.splice([ Math.floor(itemsLen / 2) ], 1)[0];
+        
+        for(i = 0; i < itemsLen; i++ ){
+          
+          if( theItems[i] < pivot[0] ){
+            less.push( theItems[i] );
+          }
+          
+          if( theItems[i] > pivot[0] ) {
+            more.push( theItems[i] );
+          }
+          
+          if( theItems[i] == pivot[0] ){
+            pivot.push( theItems[i] );
+          }
+        }
+        console.log(pivot);
+        console.log(less);
+        console.log(more);
+        
+        console.log(sortedItems);
+        
+        return [].concat(quickSort(less), pivot, quickSort(more));
+        
+      }
+      
+      div.innerHTML += '<p>Unsorted: ' + items + ' -- Length: ' + items.length + '</p>';
+      
+      sortedItems = quickSort(items);
+
+      div.innerHTML += '<p>Sorted: &nbsp;&nbsp;' + sortedItems + ' -- Length: ' + sortedItems.length + '</p>';
+      
+      console.log(sortedItems);
+      
+      
+      
+    </script>
+</body>
+</html>
